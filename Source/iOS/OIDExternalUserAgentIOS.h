@@ -17,7 +17,7 @@
  */
 
 #import <UIKit/UIKit.h>
-
+#import <WebKit/WebKit.h>
 #import "OIDExternalUserAgent.h"
 
 @class SFSafariViewController;

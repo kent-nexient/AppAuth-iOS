@@ -70,11 +70,20 @@ NS_ASSUME_NONNULL_BEGIN
 
   // Always use SFSafariViewController
   if (!openedUserAgent && _presentingViewController) {
+    WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:_presentingViewController.view.frame configuration:theConfiguration];
+    //webView.navigationDelegate = self;
+    NSURLRequest *nsrequest = [NSURLRequest requestWithURL:requestURL];
+    [webView loadRequest:nsrequest];
+    [self.view addSubview:webView];
+
+    /*
     SFSafariViewController *safariVC =
         [[SFSafariViewController alloc] initWithURL:requestURL];
     safariVC.delegate = self;
     _safariVC = safariVC;
     [_presentingViewController presentViewController:safariVC animated:YES completion:nil];
+    */
     openedUserAgent = YES;
   }
   // iOS 8 and earlier, use mobile Safari
