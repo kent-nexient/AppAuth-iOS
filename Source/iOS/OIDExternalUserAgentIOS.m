@@ -163,7 +163,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-  decisionHandler(WKNavigationActionPolicy.WKNavigationActionPolicyAllow);
+  decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 @end
