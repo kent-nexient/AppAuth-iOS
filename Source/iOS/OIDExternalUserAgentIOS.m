@@ -27,7 +27,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OIDExternalUserAgentIOS ()<SFSafariViewControllerDelegate>
+@interface OIDExternalUserAgentIOS ()<SFSafariViewControllerDelegate,WKNavigationDelegate>
 @end
 
 @implementation OIDExternalUserAgentIOS {
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
   if (!openedUserAgent && _presentingViewController) {
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
     WKWebView *webView = [[WKWebView alloc] initWithFrame:_presentingViewController.view.frame configuration:theConfiguration];
-    //webView.navigationDelegate = self;
+    webView.navigationDelegate = self;
     NSURLRequest *nsrequest = [NSURLRequest requestWithURL:requestURL];
     [webView loadRequest:nsrequest];
     [_presentingViewController.view addSubview:webView];
@@ -158,6 +158,12 @@ NS_ASSUME_NONNULL_BEGIN
                                     underlyingError:nil
                                         description:@"No external user agent flow in progress."];
   [session failExternalUserAgentFlowWithError:error];
+}
+
+#pragma mark - WKNavigationDelegate
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+  decisionHandler(WKNavigationActionPolicy.WKNavigationActionPolicyAllow);
 }
 
 @end
