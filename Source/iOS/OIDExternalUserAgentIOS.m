@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
     //webView.navigationDelegate = self;
     NSURLRequest *nsrequest = [NSURLRequest requestWithURL:requestURL];
     [webView loadRequest:nsrequest];
-    [self.view addSubview:webView];
+    [_presentingViewController.view addSubview:webView];
 
     /*
     SFSafariViewController *safariVC =
